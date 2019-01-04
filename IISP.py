@@ -26,7 +26,7 @@ energy = 50
 
 
 def Checkp(polution):
-	print polution
+	
 	if polution >= 101:
 		#gameover
 		window.destroy()
@@ -48,6 +48,7 @@ def Checke(energy):
 		lde = Label(window2, bg="red", text="GAME OVER", font="Times 100 bold") .grid()
 	elif energy >= 101:
 		energy = 100
+
 
 class alls:
 	house = Tkinter.PhotoImage(file="/home/evan/Documents/IISPImages/Webp.net-resizeimage.gif")
@@ -97,6 +98,7 @@ class alls:
 			pop.destroy()
 			
 		def droper(window, x1, y1):
+			#destroy(choose, oke, pop)
 			x2 = str(x1)
 			y2 = str(y1)
 			xy3 = x2 + y2
@@ -122,7 +124,7 @@ class alls:
 			tkvar.trace('w', change_dropdown)
 			def ok(oke, pop, choose):
 				
-				print "value is", tkvar.get()
+				
 				building = tkvar.get()
 				builder(window, x1, y1, building, oke, pop, choose)
 				
@@ -225,6 +227,7 @@ class alls:
 			Checkp(polution)
 			Checke(energy)
 			
+			
 		
 			
 			
@@ -262,36 +265,3 @@ class alls:
 
 my_gui = alls(window)
 window.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
