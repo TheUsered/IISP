@@ -11,47 +11,57 @@ import time
 
 window = Tk()
 window.title("IISP Simulation game")
-window.configure(background="black")
+window.configure(background="#006600")
 
-house = Tkinter.PhotoImage(file="/home/evan/Documents/IISPImages/Webp.net-resizeimage.gif")
-park = Tkinter.PhotoImage(file="/home/evan/Downloads/park-clipart-free-30.gif")
-office = Tkinter.PhotoImage(file="/home/evan/Downloads/office-building.gif")
-anti = Tkinter.PhotoImage(file="/home/evan/Downloads/Solar_Panel_PNG_Clip_Art-2132.gif")
+house = Tkinter.PhotoImage(file="/home/evan/Downloads/house.gif")
+park = Tkinter.PhotoImage(file="/home/evan/Downloads/335950.gif")
+office = Tkinter.PhotoImage(file="/home/evan/Downloads/office.gif")
+anti = Tkinter.PhotoImage(file="/home/evan/Downloads/1621975.gif")
 road = Tkinter.PhotoImage(file="/home/evan/Downloads/cartoon-highway-clipart-1.gif")
 coal = Tkinter.PhotoImage(file="/home/evan/Downloads/coal-power-plant-clipart-1.gif")
 money = 500000
-polution = 10
-energy = 50
-#class house:
+polution = 0
+energy = 100
 
 
-def Checkp(polution):
-	
-	if polution >= 101:
+def Check():
+	global money
+	global polution
+	global energy
+	def end():
 		#gameover
 		window.destroy()
 		window2 = Tk()
 		window2.title("GAME OVER")
 		window2.configure(background="red")
 		lde = Label(window2, bg="red", text="GAME OVER", font="Times 100 bold") .grid()
+	if polution >= 101:
+		end()
+		print ""
+		print "You had too much pollution"
+		print ""
 	elif polution <= 0:
 		polution = 0
-	else:
-		pass
-def Checke(energy):
-	if energy <= 0:
-		#gameover
-		window.destroy()
-		window2 = Tk()
-		window2.title("GAME OVER")
-		window2.configure(background="red")
-		lde = Label(window2, bg="red", text="GAME OVER", font="Times 100 bold") .grid()
+
+	elif energy <= 0:
+		end()
+		print ""
+		print "You lost all energy"
+		print ""	
 	elif energy >= 101:
 		energy = 100
+	elif money <= 0:
+		end()
+		print ""
+		print "You went bankrupt"
+		print ""
+	else:
+		pass
+	
 
 
 class alls:
-	house = Tkinter.PhotoImage(file="/home/evan/Documents/IISPImages/Webp.net-resizeimage.gif")
+	
 	LABEL_TEXT = [
 	        "Welcome to...",
 	        "My IISP game thing",
@@ -89,162 +99,148 @@ class alls:
         	self.label_text.set(self.LABEL_TEXT[self.label_index])
 
 	def Map(self, window, building_1):
+
+		def building_window(x1,y1):
+
+
+			window3 = Tk()
+			window3.title("Building menu")
+			window3.configure(background="orange")
+			def building_window_destroy(inpute):
+				building = inpute
+				print building
+				builder(window, x1, y1, building)
+				window3.destroy()
+				
+
+
+			Label(window3, text="Choose a ", font="bold 25", fg="black", bg="orange").grid(row=0, column=0, sticky=N)
+			Label(window3, text="building", font="bold 25", fg="black", bg="orange").grid(row=0, column=1, sticky=N)
+
+			Button(window3, text="House", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("house")).grid(row=1, column=0, sticky=W)
+			Label(window3, text="Simple House, $500", font="bold 10", fg="black", bg="orange").grid(row=1, column=0, sticky=S)
+			Button(window3, text="Park", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("park")).grid(row=1, column=1, sticky=W)
+			Label(window3, text="Lowers polutition, $1000", font="bold 10", fg="black", bg="orange").grid(row=1, column=1, sticky=S)
+			Button(window3, text="Office", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("office")).grid(row=1, column=2, sticky=W)
+			Label(window3, text="Makes money, $2000", font="bold 10", fg="black", bg="orange").grid(row=1, column=2, sticky=S)
+			Button(window3, text="Anti-polution center", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("anti")).grid(row=1, column=3, sticky=W)
+			Label(window3, text="Lowers polution, makes energy, $5000", font="bold 10", fg="black", bg="orange").grid(row=1, column=3, sticky=S)
+			Button(window3, text="Road", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("road")).grid(row=1, column=4, sticky=W)
+			Label(window3, text="Just a road, $200", font="bold 10", fg="black", bg="orange").grid(row=1, column=4, sticky=S)
+			Button(window3, text="Coal power-plant", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("coal")).grid(row=1, column=5, sticky=W)
+			Label(window3, text="A lot of pollution but a lot of energy, $500", font="bold 10", fg="black", bg="orange").grid(row=1, column=5, sticky=S)
+
+
+		def upgrade_window(x1,y1):
+			window3 = Tk()
+			window3.title("Upgrade menu")
+			window3.configure(background="orange")
+			def building_window_destroy(inpute):
+				building = inpute
+				print building
+				builder(window, x1, y1, building)
+				window3.destroy()
+			Label(window3, text="Choose a ", font="bold 25", fg="black", bg="orange").grid(row=0, column=0, sticky=N)
+			Label(window3, text="Upgrade", font="bold 25", fg="black", bg="orange").grid(row=0, column=1, sticky=N)
+
+			Button(window3, text="House", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("house")).grid(row=1, column=0, sticky=W)
+			Label(window3, text="Simple House, $500", font="bold 10", fg="black", bg="orange").grid(row=1, column=0, sticky=S)
+			Button(window3, text="Park", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("park")).grid(row=1, column=1, sticky=W)
+			Label(window3, text="Lowers polutition, $1000", font="bold 10", fg="black", bg="orange").grid(row=1, column=1, sticky=S)
+			Button(window3, text="Office", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("office")).grid(row=1, column=2, sticky=W)
+			Label(window3, text="Makes money, $2000", font="bold 10", fg="black", bg="orange").grid(row=1, column=2, sticky=S)
+			Button(window3, text="Anti-polution center", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("anti")).grid(row=1, column=3, sticky=W)
+			Label(window3, text="Lowers polution, makes energy, $5000", font="bold 10", fg="black", bg="orange").grid(row=1, column=3, sticky=S)
+			Button(window3, text="Road", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("road")).grid(row=1, column=4, sticky=W)
+			Label(window3, text="Just a road, $200", font="bold 10", fg="black", bg="orange").grid(row=1, column=4, sticky=S)
+			Button(window3, text="Coal power-plant", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("coal")).grid(row=1, column=5, sticky=W)
+			Label(window3, text="A lot of pollution but a lot of energy, $500", font="bold 10", fg="black", bg="orange").grid(row=1, column=5, sticky=S)
+
+
+
 		
 
 
-		def destroy(choose, oke, pop):
-			choose.destroy()
-			oke.destroy()
-			pop.destroy()
+		def update(building):
+			global money, polution, energy
 			
-		def droper(window, x1, y1):
-			#destroy(choose, oke, pop)
-			x2 = str(x1)
-			y2 = str(y1)
-			xy3 = x2 + y2
-			
-			tkvar = StringVar(window)
-			
-
-			# Dictionary with options
-			choices = { 'House', 'Park', 'Office', 'Anti-Polution Center','Road', "Coal Power Plant"}
-			tkvar.set('Choose') # set the default option
-			
-			pop = popupMenu = OptionMenu(window, tkvar, *choices)
-			
-			choose = Label(window, text="Choose a building", bg="black", fg="white")
-			choose.grid(row = 1, column = 323)
-			pop.grid(row = 2, column = 323)
-			 
-			
-			def change_dropdown(*args):
-				print( tkvar.get() )
-			 
-			
-			tkvar.trace('w', change_dropdown)
-			def ok(oke, pop, choose):
-				
-				
-				building = tkvar.get()
-				builder(window, x1, y1, building, oke, pop, choose)
-				
-				
-				
-				
-
-				
-			
-			
-			oke = Button(window, text="OK", command=lambda: ok(oke, pop, choose))
-			
-			oke.grid(row = 3, column = 323)
-			
-		def builder(window, x1, y1, building, oke, pop, choose):
-			destroy(choose, oke, pop)
-			global money
-			global energy
-			global polution
 			if building.lower() == "house":
-				global house
-				btn[x1][y1].config(text=None)
-				btn[x1][y1].config(state=DISABLED)
+				energy -= 1
+				polution += 1
+			elif building.lower() == "park":
+				polution -= 1
+			elif building.lower() == "office":
+				energy -= 2
+				polution += 1
+				money += 1
+			elif building.lower() == "anti":
+				energy += 2
+				polution -= 2
+			elif building.lower() == "road":
+				polution += 1
+			elif building.lower() == "coal":
+				energy += 3
+				polution += 3
+			else:
+				print "But how can this be?!?!"
+			polab.config(text=polution)
+			enlab.config(text=energy)
+			monlab.config(text=money)
+			Check()
+			window.after(1000, lambda: update(building))
+			
+			
+		def builder(window, x1, y1, building):
+
+			global money, energy, polution, house, park, office, anti, roal, coal
+			if building.lower() == "house":
 				btn[x1][y1].config(image=house)
 				btn[x1][y1].photo = house
-				btn[x1][y1].config(width=100, height=100)
 				money -= 500
-				energy -= 2
-				polution += 2
-				monlab.config(text=money)
-				polab.config(text=polution)
-				enlab.config(text=energy)
 			elif building.lower() == "park":
-				global park
-				btn[x1][y1].config(text=None)
-				btn[x1][y1].config(state=DISABLED)
 				btn[x1][y1].config(image=park)
 				btn[x1][y1].photo = park
-				btn[x1][y1].config(width=100, height=100)
 				money -= 1000
-				energy -= 2
-				polution -= 5
-				monlab.config(text=money)
-				polab.config(text=polution)
-				enlab.config(text=energy)
 			elif building.lower() == "office":
-				global office
-				btn[x1][y1].config(text=None)
-				btn[x1][y1].config(state=DISABLED)
 				btn[x1][y1].config(image=office)
 				btn[x1][y1].photo = office
-				btn[x1][y1].config(width=100, height=100)
 				money -= 2000
-				energy -= 5
-				polution += 10
-				monlab.config(text=money)
-				polab.config(text=polution)
-				enlab.config(text=energy)
-			elif building.lower() == "anti-polution center":
-				global anti
-				btn[x1][y1].config(text=None)
-				btn[x1][y1].config(state=DISABLED)
+			elif building.lower() == "anti":
 				btn[x1][y1].config(image=anti)
 				btn[x1][y1].photo = anti
-				btn[x1][y1].config(width=100, height=100)
 				money -= 5000
-				energy -= 5
-				polution -= 20
-				monlab.config(text=money)
-				polab.config(text=polution)
-				enlab.config(text=energy)
 			elif building.lower() == "road":
-				global road
-				btn[x1][y1].config(text=None)
-				btn[x1][y1].config(state=DISABLED)
 				btn[x1][y1].config(image=road)
 				btn[x1][y1].photo = road
-				btn[x1][y1].config(width=100, height=100)
 				money -= 200
-				energy -= 5
-				polution += 10
-				monlab.config(text=money)
-				polab.config(text=polution)
-				enlab.config(text=energy)
-			elif building.lower() == "coal power plant":
-				global coal
-				btn[x1][y1].config(text=None)
-				btn[x1][y1].config(state=DISABLED)
+			elif building.lower() == "coal":
 				btn[x1][y1].config(image=coal)
 				btn[x1][y1].photo = coal
-				btn[x1][y1].config(width=100, height=100)
 				money -= 3000
-				energy += 30
-				polution += 30
-				monlab.config(text=money)
-				polab.config(text=polution)
-				enlab.config(text=energy)
-			global polution
+
+			btn[x1][y1].config(text=None)
+			btn[x1][y1].config(command=lambda: upgrade_window(x1,y1))
+			btn[x1][y1].config(width=100, height=100)
+			monlab.config(text=money)
+			update(building)
+			Check()
 			
-			Checkp(polution)
-			Checke(energy)
 			
 			
 		
 			
 			
-		global energy
-		global polution
-		global money		
+		global energy, polution, money
 		
-		Label (window, text="Welcome to ", bg="black", fg="white", font="bold 25") .grid(row=0, column=0, sticky=S)
-		Label (window, text="the world", bg="black", fg="white", font="bold 25") .grid(row=0, column=1, sticky=S)
-		Label(window, text="Energy:", bg="black", fg="white", font="bold 10") .grid(row=1, column=0, sticky=S)
-		Label(window, text="Polution:", bg="black", fg="white", font="bold 10") .grid(row=1, column=1, sticky=S)
-		Label(window, text="Money:", bg="black", fg="white", font="bold 10") .grid(row=1, column=2, sticky=S)
-		enlab = Label(window, text=energy, bg="black", fg="white", font="bold 10") 
+		
+		Label(window, text="Energy:", bg="#006600", fg="white", font="bold 10") .grid(row=1, column=0, sticky=S)
+		Label(window, text="Polution:", bg="#006600", fg="white", font="bold 10") .grid(row=1, column=1, sticky=S)
+		Label(window, text="Money:", bg="#006600", fg="white", font="bold 10") .grid(row=1, column=2, sticky=S)
+		enlab = Label(window, text=energy, bg="#006600", fg="white", font="bold 10") 
 		enlab.grid(row=2, column=0, sticky=S)
-		polab = Label(window, text=polution, bg="black", fg="white", font="bold 10") 
+		polab = Label(window, text=polution, bg="#006600", fg="white", font="bold 10") 
 		polab.grid(row=2, column=1, sticky=S)
-		monlab=Label(window, text=money, bg="black", fg="white", font="bold 10") 
+		monlab=Label(window, text=money, bg="#006600", fg="white", font="bold 10") 
 		monlab.grid(row=2, column=2, sticky=S)
 
 		
@@ -252,7 +248,7 @@ class alls:
 		btn=  [[0 for x in xrange(5)] for x in xrange(5)] 
 		for x in range(5):
 			for y in range(5):
-				btn[x][y] = Button(window, text="Choose", width=14, height=4, command= lambda x1=x, y1=y: droper(window, x1, y1))
+				btn[x][y] = Button(window, text="Choose", fg="white", bg="#006600", relief=FLAT, width=14, height=4, command= lambda x1=x, y1=y: building_window(x1,y1))
 				btn[x][y].grid(column=x, row=y+3)
 				
 		
