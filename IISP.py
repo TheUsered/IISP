@@ -13,12 +13,12 @@ window = Tk()
 window.title("IISP Simulation game")
 window.configure(background="#006600")
 
-house = Tkinter.PhotoImage(file="/home/evan/Downloads/house.gif")
-park = Tkinter.PhotoImage(file="/home/evan/Downloads/335950.gif")
-office = Tkinter.PhotoImage(file="/home/evan/Downloads/office.gif")
-anti = Tkinter.PhotoImage(file="/home/evan/Downloads/1621975.gif")
-road = Tkinter.PhotoImage(file="/home/evan/Downloads/cartoon-highway-clipart-1.gif")
-coal = Tkinter.PhotoImage(file="/home/evan/Downloads/coal-power-plant-clipart-1.gif")
+house = Tkinter.PhotoImage(file="images/house.gif")
+park = Tkinter.PhotoImage(file="images/335950.gif")
+office = Tkinter.PhotoImage(file="images/office.gif")
+anti = Tkinter.PhotoImage(file="images/1621975.gif")
+road = Tkinter.PhotoImage(file="images/cartoon-highway-clipart-1.gif")
+coal = Tkinter.PhotoImage(file="images/coal-power-plant-clipart-1.gif")
 money = 500000
 polution = 0
 energy = 100
