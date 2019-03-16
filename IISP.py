@@ -100,36 +100,49 @@ class alls:
 
 	def Map(self, window, building_1):
 
-		def building_window(x1,y1):
+		def destroy(choose, oke, pop):
+			choose.destroy()
+			oke.destroy()
+			pop.destroy()
+			
+		def droper(window, x1, y1):
+			#destroy(choose, oke, pop)
+			x2 = str(x1)
+			y2 = str(y1)
+			xy3 = x2 + y2
+			
+			tkvar = StringVar(window)
+			
 
+			# Dictionary with options
+			choices = { 'House', 'Park', 'Office', 'Anti-Polution Center','Road', "Coal Power Plant"}
+			tkvar.set('Choose') # set the default option
+			
+			pop = popupMenu = OptionMenu(window, tkvar, *choices)
+			
+			choose = Label(window, text="Choose a building", bg="#006600", fg="white")
+			choose.grid(row = 1, column = 323)
+			pop.grid(row = 2, column = 323)
+			 
+			
+			def change_dropdown(*args):
+				print( tkvar.get() )
+			 
+			
+			tkvar.trace('w', change_dropdown)
+			def ok(oke, pop, choose):
 
-			window3 = Tk()
-			window3.title("Building menu")
-			window3.configure(background="orange")
-			def building_window_destroy(inpute):
-				building = inpute
-				print building
+				choose.destroy()
+				oke.destroy()
+				pop.destroy()				
+
+				building = tkvar.get()
 				builder(window, x1, y1, building)
-				window3.destroy()
-				
 
-
-			Label(window3, text="Choose a ", font="bold 25", fg="black", bg="orange").grid(row=0, column=0, sticky=N)
-			Label(window3, text="building", font="bold 25", fg="black", bg="orange").grid(row=0, column=1, sticky=N)
-
-			Button(window3, text="House", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("house")).grid(row=1, column=0, sticky=W)
-			Label(window3, text="Simple House, $500", font="bold 10", fg="black", bg="orange").grid(row=1, column=0, sticky=S)
-			Button(window3, text="Park", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("park")).grid(row=1, column=1, sticky=W)
-			Label(window3, text="Lowers polutition, $1000", font="bold 10", fg="black", bg="orange").grid(row=1, column=1, sticky=S)
-			Button(window3, text="Office", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("office")).grid(row=1, column=2, sticky=W)
-			Label(window3, text="Makes money, $2000", font="bold 10", fg="black", bg="orange").grid(row=1, column=2, sticky=S)
-			Button(window3, text="Anti-polution center", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("anti")).grid(row=1, column=3, sticky=W)
-			Label(window3, text="Lowers polution, makes energy, $5000", font="bold 10", fg="black", bg="orange").grid(row=1, column=3, sticky=S)
-			Button(window3, text="Road", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("road")).grid(row=1, column=4, sticky=W)
-			Label(window3, text="Just a road, $200", font="bold 10", fg="black", bg="orange").grid(row=1, column=4, sticky=S)
-			Button(window3, text="Coal power-plant", font="bold 20", fg="black", bg="orange", height=5, command=lambda: building_window_destroy("coal")).grid(row=1, column=5, sticky=W)
-			Label(window3, text="A lot of pollution but a lot of energy, $500", font="bold 10", fg="black", bg="orange").grid(row=1, column=5, sticky=S)
-
+			
+			oke = Button(window, text="OK", command=lambda: ok(oke, pop, choose))
+			
+			oke.grid(row = 3, column = 323)
 
 		def upgrade_window(x1,y1):
 			window3 = Tk()
@@ -182,7 +195,7 @@ class alls:
 				energy += 3
 				polution += 3
 			else:
-				print "But how can this be?!?!"
+				droper(window, x1, y1)
 			polab.config(text=polution)
 			enlab.config(text=energy)
 			monlab.config(text=money)
@@ -191,8 +204,10 @@ class alls:
 			
 			
 		def builder(window, x1, y1, building):
-
+			w = 100
+			h = 100
 			global money, energy, polution, house, park, office, anti, roal, coal
+			btn[x1][y1].config(command=lambda: upgrade_window(x1,y1))
 			if building.lower() == "house":
 				btn[x1][y1].config(image=house)
 				btn[x1][y1].photo = house
@@ -217,10 +232,14 @@ class alls:
 				btn[x1][y1].config(image=coal)
 				btn[x1][y1].photo = coal
 				money -= 3000
+			else:
+				w = 14
+				h = 4
+				btn[x1][y1].config(command=lambda: droper(window, x1, y1))
 
 			btn[x1][y1].config(text=None)
-			btn[x1][y1].config(command=lambda: upgrade_window(x1,y1))
-			btn[x1][y1].config(width=100, height=100)
+			
+			btn[x1][y1].config(width=w, height=h)
 			monlab.config(text=money)
 			update(building)
 			Check()
@@ -248,7 +267,7 @@ class alls:
 		btn=  [[0 for x in xrange(5)] for x in xrange(5)] 
 		for x in range(5):
 			for y in range(5):
-				btn[x][y] = Button(window, text="Choose", fg="white", bg="#006600", relief=FLAT, width=14, height=4, command= lambda x1=x, y1=y: building_window(x1,y1))
+				btn[x][y] = Button(window, text="Choose", fg="white", bg="#006600", relief=FLAT, width=14, height=4, command= lambda x1=x, y1=y: droper(window,x1,y1))
 				btn[x][y].grid(column=x, row=y+3)
 				
 		
