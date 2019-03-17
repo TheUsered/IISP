@@ -128,10 +128,11 @@ class Checker:
     def end(self):
 	#gameover
         print "Game over"
-	#window2 = Tk()
-	#window2.title("GAME OVER")
-	#window2.configure(background="red")
-	#lde = Label(window2, bg="red", text="GAME OVER", font="Times 100 bold") .grid()
+	window3 = Tk()
+	window3.title("GAME OVER")
+	window3.configure(background="red")
+	lde = Label(window3, bg="red", text="GAME OVER", font="Times 100 bold") .grid()
+	window3.mainloop()
         self.checking = False;
 
     def check(self):
