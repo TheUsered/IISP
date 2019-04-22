@@ -15,7 +15,7 @@ window.title("IISP Simulation game")
 window.configure(background="#006600")
 
 monlab = None
-money = 500000
+money = 5000
 
 polab = None
 pollution = 0
